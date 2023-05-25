@@ -12,24 +12,27 @@ services:
     volumes:
       - ./backend/:/app/
     depends_on:
-      - db
+      - postgres
     networks:
       - docker-ci-network
     links:
-      - db
+      - postgres
     env_file:
       - ./backend/.env
-  db:
+  postgres:
     image: postgres:15
     restart: always
-    expose:
-      - 5432
+    # expose:
+    #   - 5432
+    ports:
+      - 5432:5432
     env_file:
       - .db.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks: 
       - docker-ci-network
+    hostname: db
 
 volumes:
   postgres_data:
