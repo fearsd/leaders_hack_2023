@@ -117,6 +117,9 @@ class UserBase(SQLModel):
     datetime_created: Optional[datetime] = Field(
         sa_column=Column(DateTime(timezone=True), server_default=func.now())
     )
+    firstname: Optional[str]
+    lastname: Optional[str]
+    patronymic: Optional[str]
 
 
 class UserAccount(UserBase, table=True):
