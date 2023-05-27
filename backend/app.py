@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from fastapi import APIRouter
 
-from db.models import (Category, Level1, Level2, District, Schedule,
-                       Municipal, Address,
-                       Route, UserAccount, #Group, Attendance
-                       )
+
+from api.users import users_router
 
 app = FastAPI(title='LeadersHack 2023 #19track MISIS 5+1')
 
@@ -21,3 +19,4 @@ async def index():
 
 
 app.include_router(common_router, tags=['common'])
+app.include_router(users_router, prefix='/api', tags=['users'])
