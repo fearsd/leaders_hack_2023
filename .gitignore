@@ -2,6 +2,9 @@
 *.pdf
 .db.env
 .DS_Store
+.fleet
+*.json
+*.gz
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
