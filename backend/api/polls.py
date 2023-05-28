@@ -40,7 +40,7 @@ def get_poll(db: Session = Depends(get_db)):
 
 
 @polls_router.post(
-    '/result',
+    '/polls/result',
     name='Результат',
     description='Сохранение результатов опроса',
     response_model=Result
