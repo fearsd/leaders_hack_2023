@@ -9,15 +9,18 @@ from utils.ml_wrapper import filter_groups_by_poll
 
 cli = typer.Typer()
 
+
 @cli.command()
 def hello(name: str):
     print(f"Hello {name}")
+
 
 @cli.command()
 def ml():
     db: Session = next(get_db())
     res = db.query(Result).get(7)
     filter_groups_by_poll(res)
+
 
 @cli.command()
 def exporting():
