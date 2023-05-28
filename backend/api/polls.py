@@ -54,5 +54,12 @@ def post_result(result: ResultPost, db: Session = Depends(get_db)):
     db.refresh(res)
     for ans in answers:
         ans['result_id'] = res.id
-    db.bulk_insert_mappings(Answer, answers)
+        ans['options'] = [db.query(Option).get(id) for id in ans['options']]
+        _ans = Answer(**ans)
+        db.add(_ans)
+        db.commit()
+
+    # db.bulk_insert_mappings(Answer, answers)
+    # db.commit()
+    db.refresh(res)
     return res
