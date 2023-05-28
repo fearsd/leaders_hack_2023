@@ -19,6 +19,16 @@ class PollDetail(PollBase):
     questions: List[QuestionDetail]
 
 
+class AnswerPost(BaseModel):
+    question_id: int
+    options: List[int]
+
+
+class ResultPost(BaseModel):
+    poll_id: int
+    answers: List[AnswerPost]
+
+
 @polls_router.get(
     '/poll',
     response_model=PollDetail,
@@ -27,3 +37,22 @@ class PollDetail(PollBase):
 )
 def get_poll(db: Session = Depends(get_db)):
     return db.query(Poll).first()
+
+
+@polls_router.post(
+    '/result',
+    name='Результат',
+    description='Сохранение результатов опроса',
+    response_model=Result
+)
+def post_result(result: ResultPost, db: Session = Depends(get_db)):
+    result = result.dict()
+    answers = result.pop('answers', None)
+    res = Result(**result)
+    db.add(res)
+    db.commit()
+    db.refresh(res)
+    for ans in answers:
+        ans['result_id'] = res.id
+    db.bulk_insert_mappings(Answer, answers)
+    return res

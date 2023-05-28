@@ -35,6 +35,7 @@ class Question(QuestionBase, table=True):
     poll_id: Optional[int] = Field(default=None, foreign_key="poll.id")
     poll: Optional[Poll] = Relationship(back_populates="questions")
     options: List["Option"] = Relationship(back_populates="question")
+    answers: List["Answer"] = Relationship(back_populates="question")        
         
     
 class OptionBase(SQLModel):
@@ -66,6 +67,8 @@ class Result(SQLModel, table=True):
     
 class Answer(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
+    question_id: Optional[int] = Field(default=None, foreign_key="question.id")
+    question: Optional[Question] = Relationship(back_populates="answers")
     options: List["Option"] = Relationship(back_populates="answers", link_model=OptionResultLink)
     result_id: Optional[int] = Field(default=None, foreign_key="result.id")
     result: Optional[Result] = Relationship(back_populates="answers")
