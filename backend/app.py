@@ -1,11 +1,20 @@
 from fastapi import FastAPI
 from fastapi import APIRouter
-
+from fastapi.middleware.cors import CORSMiddleware
 
 from api.users import users_router
 from api.districts import district_router
 
 app = FastAPI(title='LeadersHack 2023 #19track MISIS 5+1')
+origins = ['*']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 common_router = APIRouter()
 

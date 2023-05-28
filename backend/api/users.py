@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 
+
 from db.db import get_db
 from db.models import UserAccount, Attendance, UserBase
 
