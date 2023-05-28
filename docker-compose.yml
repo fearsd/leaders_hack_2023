@@ -13,32 +13,42 @@ services:
       - ./backend/:/backend/
     depends_on:
       - postgres
-      - ml
+#      - ml
     networks:
       - docker-ci-network
     links:
       - postgres
     env_file:
       - ./backend/.env
-  ml:
-    build: ml/.
-    container_name: ml
+  frontend:
+    build: frontend/.
+    container_name: frontend
     ports:
-      - "8023:8000"
+      - "80:3000"
     restart: unless-stopped
     volumes:
-      - ./ml/:/ml/
-    depends_on:
-      - postgres
+      - ./frontend/:/frontend/
     networks:
       - docker-ci-network
+#  ml:
+#    build: ml/.
+#    container_name: ml
+#    ports:
+#      - "8023:8000"
+#    restart: unless-stopped
+#    volumes:
+#      - ./ml/:/ml/
+#    depends_on:
+#      - postgres
+#    networks:
+#      - docker-ci-network
   postgres:
     image: postgres:15
     restart: always
     # expose:
     #   - 5432
     ports:
-      - 5432:5432
+      - "5432:5432"
     env_file:
       - .db.env
     volumes:

@@ -3,7 +3,7 @@
 .db.env
 .DS_Store
 .fleet
-*.json
+# *.json
 
 data/
 log/
