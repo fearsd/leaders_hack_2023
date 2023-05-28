@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.users import users_router
 from api.districts import district_router
+from api.polls import polls_router
 
 app = FastAPI(title='LeadersHack 2023 #19track MISIS 5+1')
 origins = ['*']
@@ -31,3 +32,4 @@ async def index():
 app.include_router(common_router, tags=['common'])
 app.include_router(users_router, prefix='/api', tags=['users'])
 app.include_router(district_router, prefix='/api', tags=['utils'])
+app.include_router(polls_router, prefix='/api', tags=['polls'])

@@ -8,6 +8,7 @@ from logging.config import fileConfig
 from sqlmodel import SQLModel
 
 from db.models import (Category, Level1, Level2, Schedule, District, Municipal, Address, UserAccount, Route)
+from db.poll_models import (Poll, Question, Option, Result, Answer)
 
 
 # this is the Alembic Config object, which provides

@@ -4,7 +4,17 @@
 .DS_Store
 .fleet
 *.json
+
+data/
+log/
+
+*.zip
+# dump db
 *.gz
+
+# ml container
+*.pth
+*.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
